@@ -44,6 +44,7 @@ public class MainPageTest {
         assertFalse(shadowBox.isEmpty(), "Shadowbox меню не найдено");
 
     }
+    
     @Test
     public void searchGames() {
         String word = "Reforge";
