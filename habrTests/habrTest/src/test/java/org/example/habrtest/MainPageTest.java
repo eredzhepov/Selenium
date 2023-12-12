@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -44,7 +45,7 @@ public class MainPageTest {
         assertFalse(shadowBox.isEmpty(), "Shadowbox меню не найдено");
 
     }
-    
+
     @Test
     public void searchGames() {
         String word = "Reforge";
@@ -55,6 +56,8 @@ public class MainPageTest {
         WebElement searchButton = driver.findElement(By.xpath("//div[@class='tm-input-text-decorated__label tm-input-text-decorated__label_after']"));
         searchButton.click();
         assertEquals(word, "Reforge", "Не верное значение в строке поиска");
+
+
 
     }
 }
