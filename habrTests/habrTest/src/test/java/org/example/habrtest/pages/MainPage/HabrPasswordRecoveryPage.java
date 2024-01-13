@@ -1,4 +1,4 @@
-package org.example.habrtest.pages;
+package org.example.habrtest.pages.MainPage;
 
 import org.example.habrtest.AllureLogger;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +30,18 @@ public class HabrPasswordRecoveryPage {
     public void signUpButtonClick(){
         LOG.info("Нажали на кнопку регистрации");
         signUpButton.click();
+    }
+    @FindBy(css = "button[name='go']")
+    private WebElement submitButton;
+    public Boolean subnitButtonIsDisable() {
+        LOG.info("Проверка, что кнопка Отправить - disabled");
+        return submitButton.isEnabled();
+    }
+    @FindBy(css = "input[type='email']")
+    private WebElement emailIputField;
+    public void setEmailInputField(String yourEmail){
+        LOG.info("В поле email введен текст - " + yourEmail);
+        emailIputField.sendKeys(yourEmail);
     }
     public HabrPasswordRecoveryPage(WebDriver driver){
         this.driver = driver;
