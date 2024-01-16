@@ -97,6 +97,7 @@ public class MainPage {
     public void clickAllFlows(){
         listMenu.get(1).click();
     }
+
     public MainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);

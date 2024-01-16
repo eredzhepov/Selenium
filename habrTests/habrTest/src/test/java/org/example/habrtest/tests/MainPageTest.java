@@ -4,6 +4,9 @@ import org.example.habrtest.MyExtension;
 import org.example.habrtest.pages.MainPage.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainPageTest extends BaseTest {
     private MainPage mainPage;
     private LogInPage logInPage;
-    private HabrMyFeedPage habrMyFeedPage;
     private HabrSignUpPage habrSignUpPage;
     private HabrPasswordRecoveryPage habrPasswordRecoveryPage;
     private HabrAllFlowsPage habrAllFlowsPage;
@@ -23,7 +25,6 @@ public class MainPageTest extends BaseTest {
         getDriver().get("https://habr.com/ru/feed/");
         mainPage = new MainPage(getDriver());
         logInPage = new LogInPage(getDriver());
-        habrMyFeedPage = new HabrMyFeedPage(getDriver());
         habrPasswordRecoveryPage = new HabrPasswordRecoveryPage(getDriver());
         habrSignUpPage = new HabrSignUpPage(getDriver());
         habrAllFlowsPage = new HabrAllFlowsPage(getDriver());
@@ -181,7 +182,31 @@ public class MainPageTest extends BaseTest {
         mainPage.clickAllFlows();
         assertTrue(habrAllFlowsPage.flowsSummaryIsDisplayed(), "Заголовок на странице с потоками не отобразился");
     }
+    @Test
+    @Tag("15")
+    @DisplayName("Все 6 пунктов меню на вкладке все потоки")
+    public void allMenuItemsAtTheAllflowsPage() {
+        int expectedAmount = 6;
+        mainPage.clickAllFlows();
+        assertEquals(expectedAmount, habrAllFlowsPage.getMenuPunctsAmount(), "Количество пунктов меню не совпадает");
+    }
+    @Test
+    @Tag("16")
+    @DisplayName("Соответствие всех пунктов меню ")
+    public void equalityAllMenuItemsAtTheAllflowsPage() {
+        String[] expectedMenuPunctsArr = {"Статьи", "Посты", "Новости", "Хабы", "Авторы", "Компании"};
+        int amount = habrAllFlowsPage.getAllFlowsMenuList().size();
+        List<WebElement> actualMenuPunct = habrAllFlowsPage.getAllFlowsMenuList();
+        String[] actualMenuPuncts = {};
+        for(int i = 0; i < amount; i++){
+            actualMenuPuncts[i] = actualMenuPunct.get(i).getText();
+        }
+        mainPage.clickAllFlows();
+        for(int i = 0; i < amount; i++){
+            assertEquals(expectedMenuPunctsArr[i],  actualMenuPuncts[i], "Пункты меню не совпадают");
+        }
 
+    }
 
 
 }

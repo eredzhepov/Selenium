@@ -24,5 +24,15 @@ public class HabrAllFlowsPage {
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
+    @FindBy(css = ".tm-tabs__tab-link.tm-tabs__tab-link")
+    private List<WebElement> allFlowsMenuList;
+    public int getMenuPunctsAmount(){
+        LOG.info("Вывести количество пунктов меню на странице Все потоки");
+        return allFlowsMenuList.size();
+    }
+    public List<WebElement> getAllFlowsMenuList(){
+        LOG.info("Возратить весь список меню");
+        return allFlowsMenuList;
+    }
 
 }
