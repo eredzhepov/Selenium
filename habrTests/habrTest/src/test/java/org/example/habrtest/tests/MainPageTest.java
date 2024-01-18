@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebElement;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,7 @@ public class MainPageTest extends BaseTest {
     private HabrSignUpPage habrSignUpPage;
     private HabrPasswordRecoveryPage habrPasswordRecoveryPage;
     private HabrAllFlowsPage habrAllFlowsPage;
+    private  HabrAddCompanyPage habrAddCompanyPage;
 
     @BeforeEach
     @Override
@@ -28,6 +30,7 @@ public class MainPageTest extends BaseTest {
         habrPasswordRecoveryPage = new HabrPasswordRecoveryPage(getDriver());
         habrSignUpPage = new HabrSignUpPage(getDriver());
         habrAllFlowsPage = new HabrAllFlowsPage(getDriver());
+        habrAddCompanyPage = new HabrAddCompanyPage(getDriver());
     }
 
     @Test
@@ -205,8 +208,49 @@ public class MainPageTest extends BaseTest {
         for(int i = 0; i < amount; i++){
             assertEquals(expectedMenuPunctsArr[i],  actualMenuPuncts[i], "Пункты меню не совпадают");
         }
-
     }
+
+    @Test
+    @Tag("17")
+    @DisplayName("Переход на страницу добавления компании")
+    public void addCompanyTitle(){
+        String expectedTitle = "Хабр — корпоративные блоги";
+        mainPage.clickAllFlows();
+        habrAllFlowsPage.elementFlowsMenuClick(6);
+        habrAllFlowsPage.clickAddCompanyButton();
+        assertEquals(expectedTitle, habrAddCompanyPage.getCompanyPageTitle(), "Title на странице не соответствует");
+    }
+    @Test
+    @Tag("18")
+    @DisplayName("Развернуть тарифный план")
+    public void tarifPlanExpand(){
+        mainPage.clickAllFlows();
+        habrAllFlowsPage.elementFlowsMenuClick(6);
+        habrAllFlowsPage.clickAddCompanyButton();
+        assertTrue(habrAddCompanyPage.pricesBoxIsdisplayed(), "Блок с прайсом не появился");
+    }
+    @Test
+    @Tag("19")
+    @DisplayName("Развернуть тарифный план")
+    public void switchLanguageToEnglish(){
+        String expectedTitle = "Habr — corporate blogs";
+        mainPage.clickAllFlows();
+        habrAllFlowsPage.elementFlowsMenuClick(6);
+        habrAllFlowsPage.clickAddCompanyButton();
+        habrAddCompanyPage.clickChooseEnLanguageLink();
+        assertEquals(expectedTitle, habrAddCompanyPage.getCompanyPageTitle(), "Title на странице не соответствует");
+    }
+    @Test
+    @Tag("20")
+    @DisplayName("Отображение блока с контактами ")
+    public void contactBlockDisplayed(){
+        mainPage.clickAllFlows();
+        habrAllFlowsPage.elementFlowsMenuClick(6);
+        habrAllFlowsPage.clickAddCompanyButton();
+        habrAddCompanyPage.clickContactUsLink();
+        assertTrue(habrAddCompanyPage.contactsBoxtsIsDisplay(), "Блок с контактами не появился");
+    }
+
 
 
 }

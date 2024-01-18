@@ -87,6 +87,12 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>${aspectj.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>io.qameta.allure</groupId>
+                        <artifactId>allure-junit5</artifactId>
+                        <version>${allure.version}</version>
+                        <scope>test</scope>
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>
