@@ -17,6 +17,7 @@ public class HabrAllFlowsPage {
     @FindBy(css = ".tm-section-name__text")
     private WebElement allFlowsSummary;
     public Boolean flowsSummaryIsDisplayed(){
+        myWait(5).visible(allFlowsSummary);
         LOG.info("Отображение заголовка на странице с потоками");
         return allFlowsSummary.isDisplayed();
     }
